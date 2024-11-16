@@ -16,12 +16,13 @@ let generateGrid = () => {
             newElement.appendChild(newRowElement);
             
             newRowElement.addEventListener("mouseover", (event) => {
-                    let randomNumber1 = Math.floor(Math.random() * 255);
-                    let randomNumber2 = Math.floor(Math.random() * 255);
-                    let randomNumber3 = Math.floor(Math.random() * 255);
-                    console.log(randomNumber1, randomNumber2,  randomNumber3)
-                    newRowElement.setAttribute("style", `flex: 1; background-color: rgb(${randomNumber1}, ${randomNumber2}, ${randomNumber3})`);
-                    // newRowElement.style.backgroundColor = rgb(randomNumber1, randomNumber2, randomNumber3);
+                    if (isRngOn) {
+                        let randomNumber1 = Math.floor(Math.random() * 255);
+                        let randomNumber2 = Math.floor(Math.random() * 255);
+                        let randomNumber3 = Math.floor(Math.random() * 255);
+                        newRowElement.setAttribute("style", `flex: 1; background-color: rgb(${randomNumber1}, ${randomNumber2}, ${randomNumber3})`);
+                    }
+                    else {newRowElement.style.backgroundColor = "green";}
             })
         } 
         container.appendChild(newElement);
@@ -36,3 +37,8 @@ resolutionChange.addEventListener("click", () => {
         generateGrid();
     })
 
+let rngControl = document.getElementById("toggle-rng");
+let isRngOn = true;
+rngControl.addEventListener("click", () => {
+    isRngOn = !isRngOn;
+})
